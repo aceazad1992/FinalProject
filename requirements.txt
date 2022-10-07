@@ -1,0 +1,13 @@
+cryptography
+email_validator
+flask
+flask_bcrypt
+flask_login
+flask_wtf
+flask_testing
+sqlalchemy
+flask_sqlalchemy
+wtforms
+wtforms[email]
+pymysql
+pytest

@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///uni.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///new1.db'
 app.config['SECRET_KEY'] = 'the random string'
 
 db = SQLAlchemy(app)
@@ -57,24 +57,16 @@ def classes():
 @app.route('/teacher/new', methods=['GET', 'POST'])
 def new_teacher():
     if request.method == 'POST':
-        name = request.form.name.data
-        #name = request.form['name'].value
-        email = request.form.email.data
-        #email = request.form['email'].value
-        subjects = request.form.subjects.data
-        subjects = request.form['subjects'].value
-        teacher = request.form.teacher.data
+        if not request.form['name']:
+            flash('Please enter all the fields', 'error')
+        else:
+            teacher = Teacher(name=request.form['name'], email=request.form['email'])
 
-        subjects = Subject(subjects)
-        teacher = Teacher(name, email)
-        teacher.subjects.add(subjects)
+            flash('Record was successfully added')
+            db.session.add(teacher)
+            db.session.commit()
 
-        flash('Record was successfully added')
-        db.session.add(subjects)
-        db.session.add(teacher)
-        db.session.commit()
-
-        return redirect(url_for('teachers'))
+            return redirect(url_for('teachers'))
     return render_template('index.html')
 
 @app.route('/student/new', methods=['GET', 'POST'])

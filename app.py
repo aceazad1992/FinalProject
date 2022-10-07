@@ -79,7 +79,7 @@ def new_student():
         if not request.form['name']:
             flash('Please enter all the fields', 'error')
         else:
-            student = Student(name=request.form['name'].value, email=request.form['email'].value, subjects=request.form['subjects'].value)
+            student = Student(name=request.form['name'], email=request.form['email'])
             db.session.add(student)
             db.session.commit()
             flash('Record was successfully added')
@@ -162,6 +162,10 @@ def delete_class(subject_id):
     flash('Record was successfully deleted')
     return redirect(url_for('index'))
 
-if __name__ == '__main__':
+@app.before_first_request
+def createdatabase():
     db.create_all()
-    app.run(port=8000, debug=True)
+
+
+if __name__ == '__main__':
+    app.run(port=8000, debug=True, host='0.0.0.0')

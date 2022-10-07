@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>College Admin Page</title>
+</head>
+<body>
+
+
+
+<h1> College Admin Page</h1>
+
+<h2> Add New Teacher</h2>
+
+<table>
+    <form action="/teacher/new" method="POST">
+    <input type="text" name="name" placeholder="Enter Name"/>
+    <input type="text" name="email" placeholder="Enter Email"/>
+    <input type="text" name="subjects" placeholder="Enter Subject"/>
+    <input type="submit"/>
+</form>
+</table>
+
+<table>
+    <tbody>
+            {% for teacher in teachers %}
+               <tr>
+                  <td>{{ teacher.name }}</td>
+                  <td>{{ teacher.email }}</td>
+                  <td>{{ teacher.subjects }}</td>
+
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+</table>
+
+<h2> Add New Student</h2>
+
+<table>
+    <form action="/student/new" method="POST">
+    <input type="text" name="name" placeholder="Enter Name"/>
+    <input type="text" name="email" placeholder="Enter Email"/>
+    <input type="text" name="subjects" placeholder="Enter Subject"/>
+
+        <input type="submit"/>
+</form>
+</table>
+
+<table>
+    <tbody>
+            {% for student in students %}
+               <tr>
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.subjects }}</td>
+
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+</table>
+
+</body>
+</html>

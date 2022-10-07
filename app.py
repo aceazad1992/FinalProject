@@ -57,16 +57,20 @@ def classes():
 @app.route('/teacher/new', methods=['GET', 'POST'])
 def new_teacher():
     if request.method == 'POST':
-        name = form.name.data
+        name = request.form.name.data
         #name = request.form['name'].value
-        email = form.email.data
+        email = request.form.email.data
         #email = request.form['email'].value
-        subjects = form.subjects.data
-        #subjects = request.form['subjects'].value
-        teacher = form.teacher.data
-        #teacher = Teacher(name, email, subjects).value
+        subjects = request.form.subjects.data
+        subjects = request.form['subjects'].value
+        teacher = request.form.teacher.data
+
+        subjects = Subject(subjects)
+        teacher = Teacher(name, email)
+        teacher.subjects.add(subjects)
 
         flash('Record was successfully added')
+        db.session.add(subjects)
         db.session.add(teacher)
         db.session.commit()
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All the Students we have</title>
+</head>
+<body>
+
+<h1>All the Students we have</h1>
+
+<table>
+     <tbody>
+            {% for student in students %}
+               <tr>
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.class }}</td>
+
+               </tr>
+            {% endfor %}
+         </tbody>
+
+
+
+</table>
+
+</body>
+</html>
